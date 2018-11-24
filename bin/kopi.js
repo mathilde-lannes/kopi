@@ -47,7 +47,7 @@ var boilerplate = commander.boilerplate || "vue-dashboard"
 function run() {
     var spinner = ora('downloading project')
     spinner.start()
-    kopiMaster("mathilde-lannes/kopi/tree/" + boilerplate, to, { clone: clone }, function(err) {
+    kopiMaster("mathilde-lannes/" + boilerplate, to, { clone: clone }, function(err) {
         spinner.stop()
         if (!err) { console.log(chalk.green(name + " has been successfully created.")) } else {
             console.log(chalk.red('Failed to download repo : ' + err.message.trim()))

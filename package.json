@@ -1,5 +1,5 @@
 {
-  "name": "kopi",
+  "name": "kopi-installer",
   "version": "1.0.0",
   "description": "Generate boilerplates for your applications",
   "main": "index.js",
