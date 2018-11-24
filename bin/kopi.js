@@ -14,6 +14,7 @@ commander
 .usage('<project-name>')
 .option('-c, --clone', 'use git clone')
 .option('-b --boilerplate <boilerplate>', 'specify the template to use (default is vue-dashboard)')
+.option('--vscode', 'open the freshly created app with VS Code ')
 .parse(process.argv)
 
 commander.on('--help', function() {
@@ -44,6 +45,18 @@ var boilerplate = commander.boilerplate || "vue-dashboard"
 
 console.log(chalk.blue(figlet.textSync("kopi : " + boilerplate)))
 
+function openVSCode() {
+    if (process.platform !== 'win32') {
+        console.log("Sorry, I only know how to open VS Code on Windows :(")
+        return;
+    }
+    
+    console.log('Opening VS Code...')
+    cp.spawnSync( 'code.cmd', ['.'], {
+        cwd: `./${name}`
+    }); 
+}
+
 /**
  * Install NPM dependencies.
  */
@@ -51,14 +64,20 @@ function install() {
     const checkFileExists = s => new Promise(r => fs.access(s, fs.F_OK, e => r(!e)))
     checkFileExists(`./${name}/package.json`)
         .then(exists => {
-            if (!exists) return;
+            if (!exists) {
+                commander.vscode && openVSCode()
+                return
+            };
 
             console.log("Installing NPM dependencies...")
             const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
-            cp.spawnSync( npm, ['install'], {
+            const installation = cp.spawnSync( npm, ['install'], {
                 cwd: `./${name}`,
                 stdio: "inherit"
             }); 
+
+            const status = installation.status
+            commander.vscode && openVSCode()
         })
 }
 
