@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 
-var kopiMaster = require('download-git-repo')
-var commander = require('commander')
-var ora = require('ora')
-var chalk = require('chalk')
-var path = require('path')
-var figlet = require('figlet')
-
-console.log(chalk.blue(figlet.textSync("kopi")))
+const kopiMaster = require('download-git-repo')
+const commander = require('commander')
+const ora = require('ora')
+const chalk = require('chalk')
+const path = require('path')
+const figlet = require('figlet')
+const cp = require('child_process')
+const fs = require('fs')
 
 commander
-    .version(require('./../package').version)
-    .usage('<project-name>')
-    .option('-c, --clone', 'use git clone')
-    .parse(process.argv)
+.version(require('./../package').version)
+.usage('<project-name>')
+.option('-c, --clone', 'use git clone')
+.option('-b --boilerplate <boilerplate>', 'specify the template to use (default is vue-dashboard)')
+.parse(process.argv)
 
 commander.on('--help', function() {
     console.log()
@@ -41,15 +42,38 @@ var clone = commander.clone || false
 // TODO check if boilerplate name is valid
 var boilerplate = commander.boilerplate || "vue-dashboard"
 
+console.log(chalk.blue(figlet.textSync("kopi : " + boilerplate)))
+
 /**
- * Install vuestic.
+ * Install NPM dependencies.
+ */
+function install() {
+    const checkFileExists = s => new Promise(r => fs.access(s, fs.F_OK, e => r(!e)))
+    checkFileExists(`./${name}/package.json`)
+        .then(exists => {
+            if (!exists) return;
+
+            console.log("Installing NPM dependencies...")
+            const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+            cp.spawnSync( npm, ['install'], {
+                cwd: `./${name}`,
+                stdio: "inherit"
+            }); 
+        })
+}
+
+/**
+ * Install boilerplate.
  */
 function run() {
     var spinner = ora('downloading project')
     spinner.start()
     kopiMaster("mathilde-lannes/" + boilerplate, to, { clone: clone }, function(err) {
         spinner.stop()
-        if (!err) { console.log(chalk.green(name + " has been successfully created.")) } else {
+        if (!err) { 
+            console.log(chalk.green(name + " has been successfully created.")) 
+            install()
+        } else {
             console.log(chalk.red('Failed to download repo : ' + err.message.trim()))
         }
     })
