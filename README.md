@@ -1,3 +1,5 @@
+<img align="right" width="200" src="./assets/windmill.png">
+
 # kopi
 
 A project generator tool for your web applications.
