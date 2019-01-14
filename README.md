@@ -28,7 +28,7 @@ Open a command prompt and run :
 ## Usage
 
 <p align="center">
-    <img width="500" src="./assets/usage.png">
+    <img width="700" src="./assets/usage.png">
 </p>
 
 ### Options
