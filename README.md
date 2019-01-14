@@ -27,7 +27,9 @@ Open a command prompt and run :
 
 ## Usage
 
-`kopi <project-name> [-b <template-name>] [--vscode]`
+<p align="center">
+    <img width="500" src="./assets/usage.png">
+</p>
 
 ### Options
 
