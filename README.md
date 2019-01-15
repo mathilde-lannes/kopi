@@ -1,4 +1,4 @@
-<img align="right" width="200" src="./assets/windmill.png">
+<img align="right" width="250" src="./assets/logo.jpg">
 
 # kopi
 
@@ -57,3 +57,8 @@ Open a command prompt and run :
 - Create an application named `my-app` specifying the `vue-dashboard` template and open VSCode right after the installation :
 
 `kopi my-app -b vue-dashboard --vscode`
+
+<br>
+<p align="center">
+    <img width="700" src="./assets/ending.jpg">
+</p>
