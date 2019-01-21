@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
+@font-face {
+    font-family: 'the_foreigner';
+    src: url('../assets/fonts/the_foreign-webfont.woff2') format('woff2'),
+         url('../assets/fonts/the_foreign-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#app {
+    padding: 0;
+    margin: 0;
+}
+#header {
+    text-align: center;
+}
+
+h1 {
+    font-size: 120px !important;
+    margin-top: 0 !important;
+    margin-bottom: 50px !important;
+    font-family: 'the_foreigner' !important;
+    z-index: -5;
+}
+
+h2 {
+    font-family: 'the_foreigner' !important;
+    font-size: 50px !important;
+}
+
+#header > div {
+    font-size: 15px;
+    font-family: 'Muli';
+    color: rgb(226, 226, 226);
+}
+
+#header {
+    color: white;
+    background-color: #131e1e;
+    background-image : url("../assets/woods/layer-9.png");
+    background-position: center;
+    padding-top: 205px;
+    /* padding-bottom: 145px; */
+    height: 85vh;
+}
+
+#presentation {
+    margin-top: 75px;
+    color: white;
+    background-color: #131e1e;
+}
+
+.section {
+    text-align: justify;
+    padding-top: 3%;
+    padding-bottom: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.landscape-layer {
+    width: 100vw; 
+    top: 0px; 
+    transform: matrix(1, 0, 0, 1, 0, 0);
+}
+
+.imagine-layer {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.imagine-animated {
+    transform-style: preserve-3d;
+}
